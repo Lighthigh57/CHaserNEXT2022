@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+        _audioSource.clip = sounds[Random.Range(0, sounds.Length)];
         _audioSource.Play();
     }
 

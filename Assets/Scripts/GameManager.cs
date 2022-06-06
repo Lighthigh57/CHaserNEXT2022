@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,13 +22,17 @@ public class GameManager : MonoBehaviour
 
     private int _playerNum = 1;
     private string _playerName;
+    private UIManager uiInfo;
 
+    [FormerlySerializedAs("UIManager")] [SerializeField] private GameObject uiManager;
     [SerializeField] internal int step;
-    [SerializeField] private int turnNum = 100;
+    [SerializeField] internal int turnNum = 100;
     [SerializeField] private float delay = 1f;
 
     private void Start()
     {
+        uiInfo = uiManager.GetComponent<UIManager>();
+        uiInfo.SetTurn(turnNum);
         MapInit();
         _frame = GameObject.Find("Board");
         GameObject fBase = (GameObject)Resources.Load("FloorBase");
@@ -397,7 +402,7 @@ public class GameManager : MonoBehaviour
         for (var j = 0; j < turnNum; j++)
         {
             Debug.Log("Turn: " + j);
-
+            uiInfo.SetTurn(100 - j);
             _player1.Action1();
             //yield return new WaitForSeconds(delay);
 

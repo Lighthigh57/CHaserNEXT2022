@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 103800124}
   - component: {fileID: 103800123}
   m_Layer: 5
-  m_Name: Name
+  m_Name: HotName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -293,7 +293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -150, y: 0}
+  m_AnchoredPosition: {x: -100, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &273368680
@@ -642,7 +642,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 342562846}
   m_FillRect: {fileID: 431478155}
   m_HandleRect: {fileID: 342562845}
@@ -1125,7 +1125,7 @@ GameObject:
   - component: {fileID: 1068850459}
   - component: {fileID: 1068850458}
   m_Layer: 5
-  m_Name: Name
+  m_Name: CoolName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1563,7 +1563,7 @@ RectTransform:
   - {fileID: 1068850457}
   - {fileID: 1625288534}
   m_Father: {fileID: 1958573801}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -1958,7 +1958,7 @@ GameObject:
   - component: {fileID: 1625288536}
   - component: {fileID: 1625288535}
   m_Layer: 5
-  m_Name: Score
+  m_Name: CoolScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2318,7 +2318,7 @@ RectTransform:
   - {fileID: 103800122}
   - {fileID: 2098189396}
   m_Father: {fileID: 1958573801}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -2753,6 +2753,7 @@ GameObject:
   - component: {fileID: 1958573800}
   - component: {fileID: 1958573799}
   - component: {fileID: 1958573798}
+  - component: {fileID: 1958573802}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2833,8 +2834,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1770159669}
   - {fileID: 1280502831}
+  - {fileID: 1770159669}
   - {fileID: 1193263859}
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -2844,6 +2845,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1958573802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958573797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955fc1672a2821d4b824a634837895d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolName: {fileID: 1068850458}
+  hotName: {fileID: 103800123}
+  coolItem: {fileID: 1625288535}
+  hotItem: {fileID: 2098189397}
+  turnRemain: {fileID: 273368680}
+  turnVisual: {fileID: 406123828}
 --- !u!1 &1988173950
 GameObject:
   m_ObjectHideFlags: 0
@@ -2923,7 +2942,7 @@ GameObject:
   - component: {fileID: 2098189398}
   - component: {fileID: 2098189397}
   m_Layer: 5
-  m_Name: Score
+  m_Name: HotScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3368,6 +3387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001f4403886411748b87dbf1d69179a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 1958573797}
   step: 0
   turnNum: 100
   delay: 0.5

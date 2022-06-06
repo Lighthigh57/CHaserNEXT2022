@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public int posX, posY;
 
     public GameManager gm;
-    private Transform _mesh;
 
     private readonly int[] _up    = {  0, -1 };
     private readonly int[] _down  = {  0,  1 };
@@ -18,8 +18,6 @@ public class PlayerController : MonoBehaviour
     public int[] around;
 
     private bool _motionFlag;
-
-    private readonly int _step = 8;
 
     public void Init(int setX, int setY)
     {
@@ -31,17 +29,17 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        _mesh = transform.Find("default");
+        transform.Find("default");
     }
 
-    public int[] GetReady()
+    protected int[] GetReady()
     {
         var temp = gm.GetReady(posX, posY);
         WriteLog(temp, "GetReady");
         return temp;
     }
 
-    public void Walk(int[] dir) //dir = up: , left: , right: , down;
+    protected void Walk(int[] dir) //dir = up: , left: , right: , down;
     {
         WriteLog(dir, "Walk");
         gm.Walk(posX, posY, dir);
@@ -54,23 +52,17 @@ public class PlayerController : MonoBehaviour
     private IEnumerator WalkMotion(IReadOnlyList<int> dir)
     {
         while(_motionFlag) yield return null;
-        for(var i = 0; i < _step; i++)
-        {
-            transform.Translate(
-                dir[0] / (float)_step,
-                0,
-                -(float)dir[1] / _step);
-            yield return null;
-        }
+        transform.DOLocalMove(new Vector3(dir[0], 0, -dir[1]), 0.5f)
+            .SetRelative(true);
     }
 
-    public void Put(int[] dir)
+    protected void Put(int[] dir)
     {
         WriteLog(dir, "Put");
         gm.Put(posX, posY, dir);
     }
 
-    public int[] Look(int[] dir)
+    protected int[] Look(int[] dir)
     {
         WriteLog(dir, "Look");
         var temp = gm.Look(posX, posY, dir);
@@ -86,7 +78,7 @@ public class PlayerController : MonoBehaviour
         return temp;
     }
 
-    public void WriteLog(int[] array, string com)
+    private void WriteLog(int[] array, string com)
     {
         var text = name + ": " + com + ": [ ";
         text = array.Aggregate(text, (current, i) => current + (i + " "));
@@ -103,58 +95,36 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public int[] SetDir(int dir)
+    protected int[] SetDir(int dir)
     {
         switch (dir)
         {
             case 0:
                 //mesh.eulerAngles = new Vector3(0, 0, 0);
                 _motionFlag = true;
-                StartCoroutine(RotateMotion(0));
+                transform.DORotate(new Vector3(0, 270), 0.5f)
+                    .OnComplete(() => _motionFlag = false);
                 return _up;
             case 1:
                 //mesh.eulerAngles = new Vector3(0, 270, 0);
                 _motionFlag = true;
-                StartCoroutine(RotateMotion(270));
+                transform.DORotate(new Vector3(0,180),0.5f)
+                    .OnComplete(() => _motionFlag = false);
                 return _left;
             case 2:
                 //mesh.eulerAngles = new Vector3(0, 90, 0);
                 _motionFlag = true;
-                StartCoroutine(RotateMotion(90));
+                transform.DORotate(new Vector3(0,0),0.5f)
+                    .OnComplete(() => _motionFlag = false);
                 return _right;
             case 3:
                 //mesh.eulerAngles = new Vector3(0, 180, 0);
                 _motionFlag = true;
-                StartCoroutine(RotateMotion(180));
+                transform.DORotate(new Vector3(0, 90), 0.5f)
+                    .OnComplete(() => _motionFlag = false);
                 return _down;
             default:
                 return null;
         }
-    }
-
-    private IEnumerator RotateMotion(int targetDeg)
-    {
-        var nowDeg = _mesh.eulerAngles.y;
-
-        if (Mathf.Abs(targetDeg - nowDeg) >= 270)
-        {
-            for (var i = 1; i <= _step; i++)
-            {
-                _mesh.eulerAngles = new Vector3(0, nowDeg + (nowDeg - targetDeg) / 3 / _step * i, 0);
-                yield return null;
-            }
-        }
-        else
-        {
-            for (var i = 1; i <= _step; i++)
-            {
-                _mesh.eulerAngles = new Vector3(0, nowDeg + (targetDeg - nowDeg) / _step * i, 0);
-                yield return null;
-            }
-        }
-
-        
-        _motionFlag = false;
-        yield return null;
     }
 }
