@@ -78,10 +78,10 @@ public class ScriptShun : PlayerController
         }
     }
     /// <summary>
-    /// Î‚ß‚ÉƒIƒuƒWƒFƒNƒg‚ªŒ©‚¦‚½‚Ìˆ—
+    /// æ–œã‚ã«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè¦‹ãˆãŸæ™‚ã®å‡¦ç†
     /// </summary>
-    /// <param name="target">•ûŒü</param>
-    /// <param name="com">ƒRƒ}ƒ“ƒh</param>
+    /// <param name="target">æ–¹å‘</param>
+    /// <param name="com">ã‚³ãƒãƒ³ãƒ‰</param>
     private void SolveDiagonal(int target, string com)
     {
         if (target < 3)
@@ -98,10 +98,10 @@ public class ScriptShun : PlayerController
             priority[x] = priority[y] = 1;
     }
     /// <summary>
-    /// index‚ğA•ûŒü‚É•ÏŠ·I
+    /// indexã‚’ã€æ–¹å‘ã«å¤‰æ›ï¼
     /// </summary>
-    /// <param name="index">•ÏŠ·‚³‚ê‚éindex</param>
-    /// <returns>•ÏŠ·Œ‹‰Ê(x,y)</returns>
+    /// <param name="index">å¤‰æ›ã•ã‚Œã‚‹index</param>
+    /// <returns>å¤‰æ›çµæœ(x,y)</returns>
     private int[] ConvertDirection(int index)
     {
         switch (index)
@@ -115,7 +115,7 @@ public class ScriptShun : PlayerController
             case 7:
                 return SetDir(3);
             default:
-                Debug.LogWarning("•ûŒüw’è‚Å‚«‚Ä‚È‚¢‚æI");
+                Debug.LogWarning("æ–¹å‘æŒ‡å®šã§ãã¦ãªã„ã‚ˆï¼");
                 return null;
         }
     }
