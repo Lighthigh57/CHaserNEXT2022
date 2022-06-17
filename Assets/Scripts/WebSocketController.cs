@@ -26,10 +26,14 @@ public class WebSocketController : MonoBehaviour
         
 
     }
+
     void OnDestroy()
     {
-        server.Stop();
-        server = null;
+        if (server != null)
+        {
+            server.Stop();
+            server = null;
+        }
     }
 }
 

@@ -1,6 +1,4 @@
 using System.Net;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GetConfig : MonoBehaviour
@@ -20,8 +18,4 @@ public class GetConfig : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
