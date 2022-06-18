@@ -2968,7 +2968,7 @@ GameObject:
   - component: {fileID: 1520421429}
   - component: {fileID: 1520421431}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ConfigDetail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3014,7 +3014,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30DB\u30B9\u30C8IP\u30A2\u30C9\u30EC\u30B9:127.0.0.1\n\u30DB\u30B9\u30C8\u540D:MY-DESKTOP"
+  m_text: "\u30DB\u30B9\u30C8IP\u30A2\u30C9\u30EC\u30B9:Loading...\n\u30DB\u30B9\u30C8\u540D:Loading..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b14e744de2f47964e8459472b0b5b891, type: 2}
   m_sharedMaterial: {fileID: -3276417975887540253, guid: b14e744de2f47964e8459472b0b5b891, type: 2}
@@ -3103,6 +3103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4e917948738ff478ba7b19e516fcf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hostConfig: {fileID: 1520421429}
 --- !u!1 &1536060575
 GameObject:
   m_ObjectHideFlags: 0

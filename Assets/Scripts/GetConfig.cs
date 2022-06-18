@@ -1,21 +1,39 @@
 using System.Net;
+using System.Net.Sockets;
+using System.Threading;
+using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 public class GetConfig : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        // ホスト名を取得する
-        var hostname = Dns.GetHostName();
+    [SerializeField] private TextMeshProUGUI hostConfig;
 
-        // ホスト名からIPアドレスを取得する
-        IPAddress[] adrList = Dns.GetHostAddresses(hostname);
-        foreach (IPAddress address in adrList)
-        {
-            Debug.Log(address.ToString());
-        }
+    private string hostIP, hostName;
+    private SynchronizationContext _mainContext;
+
+    // Start is called before the first frame update
+    private void Start()
+    {
+        _mainContext = SynchronizationContext.Current;
+        
+        Task.Run(Get);
     }
 
-    // Update is called once per frame
+    private void Get()
+    {
+        var host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (var ip in host.AddressList)
+        {
+            
+            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            {
+                hostIP = ip.ToString();
+                hostName = Dns.GetHostEntry(ip).HostName;
+                break;
+            }
+        }
+        _mainContext.Post(_ => hostConfig.text = $"ホストIPアドレス:{hostIP}\nホスト名:{hostName}", null);
+    }
+    
 }
