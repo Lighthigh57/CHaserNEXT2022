@@ -874,19 +874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - {fileID: 8300000, guid: e496a2f18f6041e42bf2ad15a6545c62, type: 3}
-  - {fileID: 8300000, guid: 534be79bf889c8942afc73bab1606929, type: 3}
-  - {fileID: 8300000, guid: 465c85d1a19a87b4b9527d81d9190fb7, type: 3}
-  - {fileID: 8300000, guid: 1e44d6836f8bb4b4db8c2eabdfa5656b, type: 3}
-  - {fileID: 8300000, guid: da040eadcf9ad5243b05d9e93d72e9a8, type: 3}
-  - {fileID: 8300000, guid: c2f9d8eb5ed28ec48bb7e5639777b828, type: 3}
-  - {fileID: 8300000, guid: cf7d6fd4564ed7f46ac3e5aab5e6a32f, type: 3}
-  - {fileID: 8300000, guid: fc134c8d610b2f843b410d0e2b739ec9, type: 3}
-  - {fileID: 8300000, guid: 9c97b86d19efbb14ab00d307fc05edf5, type: 3}
-  - {fileID: 8300000, guid: 515792dc606d89c4891821a3691c64fe, type: 3}
-  - {fileID: 8300000, guid: 2f9d4a79a12e021478ccfde25d9b6a3f, type: 3}
-  - {fileID: 8300000, guid: 5b4161bbcb049ec4cb68886033c384e4, type: 3}
-  - {fileID: 8300000, guid: 77b8fbd2558b2ff489f5641d964ced46, type: 3}
+  - {fileID: 8300000, guid: 0a3410e089af2b1448ad3aa1c24707c0, type: 3}
 --- !u!82 &810753854
 AudioSource:
   m_ObjectHideFlags: 0
@@ -900,7 +888,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.1
   Loop: 1
   Mute: 0
   Spatialize: 0

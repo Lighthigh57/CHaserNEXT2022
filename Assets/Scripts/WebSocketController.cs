@@ -41,7 +41,7 @@ public class Echo : WebSocketBehavior
 {
     protected override void OnMessage (MessageEventArgs e)
     {
-        Debug.Log(e.Data);
-        Sessions.Broadcast(e.Data);
+        
     }
+    
 }
