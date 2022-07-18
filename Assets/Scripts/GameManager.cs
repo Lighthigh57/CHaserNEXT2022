@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
     private ScriptShun _player2;
 
     private int _playerNum = 1;
-    private string _playerName;
+    internal string PlayerName { get; private set; }
+    
     private UIManager uiInfo;
 
     [FormerlySerializedAs("UIManager")] [SerializeField] private GameObject uiManager;
@@ -35,13 +36,13 @@ public class GameManager : MonoBehaviour
         uiInfo.SetTurn(turnNum);
         MapInit();
         _frame = GameObject.Find("Board");
-        GameObject fBase = (GameObject)Resources.Load("FloorBase");
+        var fBase = (GameObject)Resources.Load("FloorBase");
 
-        for (int i = 0; i < Height; i++)
+        for (var i = 0; i < Height; i++)
         {
-            for (int j = 0; j < Width; j++)
+            for (var j = 0; j < Width; j++)
             {
-                GameObject temp = Instantiate(
+                var temp = Instantiate(
                                         fBase,
                                         new Vector3(j, -2, Height - 1 - i),
                                         Quaternion.identity
@@ -101,27 +102,21 @@ public class GameManager : MonoBehaviour
     {
         if (Judge(x, y))
         {
-            FinishGame(_playerName + "is lose...");
+            FinishGame(PlayerName + "is lose...");
         }
 
-        int[] result = new int[9];
+        var result = new int[9];
 
-        for (int i = 0; i < 3; i++)
+        for (var i = 0; i < 3; i++)
         {
-            for (int j = 0; j < 3; j++)
+            for (var j = 0; j < 3; j++)
             {
                 if (CheckArea(x - 1 + j, y - 1 + i))
-                {
                     result[j + 3 * i] = 2;
-                }
                 else if (i == 1 && j == 1)
-                {
                     result[j + 3 * i] = 0;
-                }
                 else
-                {
                     result[j + 3 * i] = _map[y - 1 + i, x - 1 + j];
-                }
             }
         }
 
@@ -133,7 +128,7 @@ public class GameManager : MonoBehaviour
         if (CheckArea(x + dir[0], y + dir[1]) || _map[y + dir[1], x + dir[0]] == 2)
         {
             // ����
-            FinishGame(_playerName + "is lose...");
+            FinishGame(PlayerName + "is lose...");
         }
         else
         {
@@ -143,7 +138,7 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(DestroyWall(_floorBase[y, x]));
                 if (Judge(x + dir[0], y + dir[1]))
                 {
-                    FinishGame(_playerName + "is lose...");
+                    FinishGame(PlayerName + "is lose...");
                 }
             }
             else
@@ -167,7 +162,7 @@ public class GameManager : MonoBehaviour
             if (_map[y + dir[1], x + dir[0]] == 1)
             {
                 //����
-                FinishGame(_playerName + "is win!!!");
+                FinishGame(PlayerName + "is win!!!");
             }
 
             _map[y + dir[1], x + dir[0]] = 2;
@@ -175,19 +170,19 @@ public class GameManager : MonoBehaviour
             // ���Ŕ���
             if (Judge(x, y))
             {
-                FinishGame(_playerName + "is lose...");
+                FinishGame(PlayerName + "is lose...");
             }
         }
     }
 
     public int[] Look(int x, int y, int[] dir)
     {
-        int[] result = new int[9];
+        var result = new int[9];
         int targetX = x + 2 * dir[1], targetY = y + 2 * dir[0];
 
-        for (int i = 0; i < 3; i++)
+        for (var i = 0; i < 3; i++)
         {
-            for (int j = 0; j < 3; j++)
+            for (var j = 0; j < 3; j++)
             {
                 if (CheckArea(targetX - 1 + j, targetY - 1 + i))
                 {
@@ -205,9 +200,9 @@ public class GameManager : MonoBehaviour
 
     public int[] Search(int x, int y, int[] dir)
     {
-        int[] result = new int[9];
+        var result = new int[9];
 
-        for (int i = 1; i <= 9; i++)
+        for (var i = 1; i <= 9; i++)
         {
             if (CheckArea(x + dir[0] * i, y + dir[1] * i))
             {
@@ -296,8 +291,8 @@ public class GameManager : MonoBehaviour
         }
         if (step == 4)
         {
-            int pt1 = GameObject.Find("Pt_1").GetComponent<Counter>().GetPt();
-            int pt2 = GameObject.Find("Pt_2").GetComponent<Counter>().GetPt();
+            var pt1 = GameObject.Find("Pt_1").GetComponent<Counter>().GetPt();
+            var pt2 = GameObject.Find("Pt_2").GetComponent<Counter>().GetPt();
             if (pt1 > pt2)
             {
                 FinishGame("Player_1 is win!!!");
@@ -315,18 +310,18 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Opening()
     {
-        GameObject item = (GameObject)Resources.Load("Item");
+        var item = (GameObject)Resources.Load("Item");
 
-        for (int i = 0; i < Height; i++)
+        for (var i = 0; i < Height; i++)
         {
             StartCoroutine(nameof(RowCreate), i);
             yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitForSeconds(3);
 
-        for (int i = 0; i < Height; i++)
+        for (var i = 0; i < Height; i++)
         {
-            for (int j = 0; j < Width; j++)
+            for (var j = 0; j < Width; j++)
             {
                 if (_map[i, j] == 2)
                 {
@@ -334,15 +329,15 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        for (int i = 0; i < Height; i++)
+        for (var i = 0; i < Height; i++)
         {
 
-            for (int j = 0; j < Width; j++)
+            for (var j = 0; j < Width; j++)
             {
                 switch (_map[i, j])
                 {
                     case 1:
-                        GameObject temp = Instantiate(
+                        var temp = Instantiate(
                             (GameObject)Resources.Load("Player_" + _playerNum),
                             new Vector3(j, 10, Height - 1 - i),
                             Quaternion.identity
@@ -382,10 +377,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RowCreate(int i)
     {
-        GameObject floor = (GameObject)Resources.Load("floor");
-        for (int j = 0; j < Width; j++)
+        var floor = (GameObject)Resources.Load("floor");
+        for (var j = 0; j < Width; j++)
         {
-            GameObject temp = Instantiate(
+            var temp = Instantiate(
                                     floor,
                                     new Vector3(j, 10, Height - 1 - i),
                                     Quaternion.identity
@@ -402,52 +397,38 @@ public class GameManager : MonoBehaviour
         for (var j = 0; j < turnNum; j++)
         {
             Debug.Log("Turn: " + j);
-            uiInfo.SetTurn(100 - j);
+            uiInfo.SetTurn(turnNum - j);
             _player1.Action1();
             //yield return new WaitForSeconds(delay);
 
-            _playerName = _player1.name;
+            PlayerName = _player1.name;
 
             _player1.Action2();
             yield return new WaitForSeconds(delay);
 
             
             if (_finishDelay)
-            {
                 yield return new WaitForSeconds(3);
-            }
             if (!isPlaying)
-            {
-                break;
-            }
-
-
+                yield break;
 
             _player2.Action1();
             //yield return new WaitForSeconds(delay);
 
-            _playerName = _player2.name;
+            PlayerName = _player2.name;
 
             _player2.Action2();
             yield return new WaitForSeconds(delay);
 
             
             if (_finishDelay)
-            {
                 yield return new WaitForSeconds(3);
-            }
             if (!isPlaying)
-            {
-                break;
-            }
+                yield break;
 
         }
         yield return new WaitForSeconds(1);
         step = 4;
     }
 
-    public string GetPlayerName()
-    {
-        return _playerName;
-    }
 }

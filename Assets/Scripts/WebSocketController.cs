@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Net;
-using System.Collections;
 using WebSocketSharp;
 using WebSocketSharp.Server;
 

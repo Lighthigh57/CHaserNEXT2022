@@ -36,7 +36,7 @@ public class ItemController : MonoBehaviour
             // ‰¹’Ç‰Á
 
 
-            if (_gm.GetPlayerName() == "Player_1")
+            if (_gm.PlayerName == "Player_1")
             {
                 transform.position = new Vector3(-5, 10, 8);
                 GameObject.Find("Pt_1").GetComponent<Counter>().Point();
